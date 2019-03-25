@@ -9,21 +9,47 @@ GAME RULES:
 
 */
 
-let scores, roundScore, activePlayer, dice;
+let scores, roundScore, activePlayer;
 
 scores = [0, 0];
 roundScore = 0;
 activePlayer = 1;
 
-dice = Math.floor(Math.random() * 6) + 1;
-
-document.querySelector("#current-" + activePlayer).textContent = dice;
+//document.querySelector("#current-" + activePlayer).textContent = dice;
 
 /* document.querySelector("#current-" + activePlayer).innerHTML =
  "<em>" + dice + "</em>";
 */
 let getter = document.querySelector("#score-0").textContent;
 
-console.log(getter);
-
 document.querySelector(".dice").style.display = "none";
+
+document.getElementById("score-0").textContent = "0";
+document.getElementById("current-0").textContent = "0";
+document.getElementById("score-1").textContent = "0";
+document.getElementById("current-1").textContent = "0";
+
+// callback function is not called by us rather than its called by another function
+function btn() {
+  //role the dice
+}
+
+btn();
+// anonymus function is a function without a name that cannot be reused or recalled.
+document.querySelector(".btn-roll").addEventListener(
+  "click",
+  /* if write our function here instead , it will be an anonymus function*/
+  function() {
+    // 1-random dice number
+    let dice = Math.floor(Math.random() * 6) + 1;
+    console.log(dice);
+
+    // 2- Display the correct dice number
+    let diceDom = document.querySelector(".dice");
+    diceDom.style.display = "block";
+    diceDom.src = "dice-" + dice + ".png";
+
+    // 3- Update the round score if the dice number is NOT 1
+    document.getElementById("");
+  }
+);
