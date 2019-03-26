@@ -72,7 +72,7 @@ body {
 }
 
 .active {
-  background-color: #ede9e9;
+  background-color: #f7f7f7;
 
   -moz-box-shadow: inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
