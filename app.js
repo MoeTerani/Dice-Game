@@ -11,23 +11,43 @@ GAME RULES:
 
 let scores, roundScore, activePlayer;
 
-scores = [0, 0];
-roundScore = 0;
-activePlayer = 0;
+init();
 
+// A setter example
 //document.querySelector("#current-" + activePlayer).textContent = dice;
 
 /* document.querySelector("#current-" + activePlayer).innerHTML =
  "<em>" + dice + "</em>";
 */
-let getter = document.querySelector("#score-0").textContent;
 
-document.querySelector(".dice").style.display = "none";
+// A Getter example
+//let getter = document.querySelector("#score-0").textContent;
 
-document.getElementById("score-0").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-1").textContent = "0";
+//will be changing the active player number between 0 and 1
+function switchPlayer() {
+  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+}
+
+// WIll add the active class to the active player and remove it from the other
+
+function activePlayerStyle() {
+  //   document
+  //     .querySelector(".player-0-panel")
+  //     .classList.remove("active");
+  //   document
+  //     .querySelector(".player-1-panel")
+  //     .classList.add("active");
+  //toggle method add a class if it doesn't exist and remove it if it already exist.
+
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+}
+
+//hide the dice
+
+function hideDice() {
+  document.querySelector(".dice").style.display = "none";
+}
 
 // callback function is not called by us rather than its called by another function
 function btn() {
@@ -36,6 +56,8 @@ function btn() {
 
 btn();
 // anonymus function is a function without a name that cannot be reused or recalled.
+
+//Event
 document.querySelector(".btn-roll").addEventListener(
   "click",
   /* if write our function here instead , it will be an anonymus function*/
@@ -66,38 +88,53 @@ document.querySelector(".btn-roll").addEventListener(
     }
   }
 );
-//will be changing the active player number between 0 and 1
-function switchPlayer() {
-  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-}
 
-// WIll add the active class to the active player and remove it from the other
-
-function activePlayerStyle() {
-  //   document
-  //     .querySelector(".player-0-panel")
-  //     .classList.remove("active");
-  //   document
-  //     .querySelector(".player-1-panel")
-  //     .classList.add("active");
-  //toggle method add a class if it doesn't exist and remove it if it already exist.
-
-  document.querySelector(".player-0-panel").classList.toggle("active");
-  document.querySelector(".player-1-panel").classList.toggle("active");
-}
-
-//hide the dice
-
-function hideDice() {
-  document.querySelector(".dice").style.display = "none";
-}
+// Event hold button
 document.querySelector(".btn-hold").addEventListener("click", function() {
+  // Add current score to GLOBAL score
   scores[activePlayer] += roundScore;
+  // Update the UI
   document.getElementById("score-" + activePlayer).textContent =
     scores[activePlayer];
-  roundScore = 0;
-  document.getElementById("current-" + activePlayer).textContent = roundScore;
-  switchPlayer();
-  activePlayerStyle();
-  hideDice();
+
+  //Check if the play has WON?
+  if (scores[activePlayer] >= 20) {
+    document.querySelector("#name-" + activePlayer).textContent = "WINNER!";
+    hideDice();
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.add("winner");
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.remove("active");
+  } else {
+    //Reset global current score
+    roundScore = 0;
+    //Reset the UI
+    document.getElementById("current-" + activePlayer).textContent = roundScore;
+    //chnage the player
+    switchPlayer();
+    // Upadet UI based on active player
+    activePlayerStyle();
+    //Hide the Dice
+    hideDice();
+  }
 });
+
+// EVENT NEW GAME
+
+document.querySelector(".btn-new").addEventListener("click", init);
+
+// Initializing function
+function init() {
+  scores = [0, 0];
+  roundScore = 0;
+  activePlayer = 0;
+
+  document.querySelector(".dice").style.display = "none";
+
+  document.getElementById("score-0").textContent = "0";
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("score-1").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+}
