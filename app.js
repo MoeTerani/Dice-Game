@@ -13,7 +13,7 @@ let scores, roundScore, activePlayer;
 
 scores = [0, 0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
 //document.querySelector("#current-" + activePlayer).textContent = dice;
 
@@ -50,6 +50,54 @@ document.querySelector(".btn-roll").addEventListener(
     diceDom.src = "dice-" + dice + ".png";
 
     // 3- Update the round score if the dice number is NOT 1
-    document.getElementById("");
+    if (dice !== 1) {
+      roundScore += dice;
+      document.getElementById(
+        "current-" + activePlayer
+      ).textContent = roundScore;
+    } else {
+      roundScore = 0;
+      document.getElementById(
+        "current-" + activePlayer
+      ).textContent = roundScore;
+      switchPlayer();
+      activePlayerStyle();
+      hideDice();
+    }
   }
 );
+//will be changing the active player number between 0 and 1
+function switchPlayer() {
+  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+}
+
+// WIll add the active class to the active player and remove it from the other
+
+function activePlayerStyle() {
+  //   document
+  //     .querySelector(".player-0-panel")
+  //     .classList.remove("active");
+  //   document
+  //     .querySelector(".player-1-panel")
+  //     .classList.add("active");
+  //toggle method add a class if it doesn't exist and remove it if it already exist.
+
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+}
+
+//hide the dice
+
+function hideDice() {
+  document.querySelector(".dice").style.display = "none";
+}
+document.querySelector(".btn-hold").addEventListener("click", function() {
+  scores[activePlayer] += roundScore;
+  document.getElementById("score-" + activePlayer).textContent =
+    scores[activePlayer];
+  roundScore = 0;
+  document.getElementById("current-" + activePlayer).textContent = roundScore;
+  switchPlayer();
+  activePlayerStyle();
+  hideDice();
+});
