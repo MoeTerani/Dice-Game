@@ -76,7 +76,7 @@ body {
 
 .active {
   background-color: #fff;
-  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 .active .player-name {
   font-weight: 500;
@@ -90,9 +90,12 @@ body {
   top: -7px;
   right: 10px;
 }
+.active .player-current-box {
+  background-color: #eb4d4d;
+}
 
 .player-current-box {
-  background-color: #eb4d4d;
+  background-color: #ea8a8a;
   color: #fff;
   width: 40%;
   margin: 0 auto;
@@ -152,6 +155,11 @@ i {
 .btn-new {
   top: 45px;
 }
+.btn-guide {
+  top: 70px;
+  font-size: 15px;
+  padding-top: 15px;
+}
 .btn-roll {
   top: 403px;
 }
@@ -165,13 +173,49 @@ i {
   top: 178px;
   transform: translateX(-50%);
   height: 100px;
-  box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .winner {
-  background-color: #f7f7f7;
+  background-color: #ffffff;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 .winner .player-name {
-  font-weight: 300;
+  font-weight: 600;
   color: #eb4d4d;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 80%;
+  height: 70%;
+  top: 20%;
+  left: 10%;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#text {
+  display: block;
+  position: absolute;
+  font-family: Lato;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 200;
+  width: 70%;
+
+  top: 15%;
+  left: 15%;
+  color: white;
+  /* transform: translate(-50%, -50%); */
+  /* -ms-transform: translate(-50%, -50%); */
+}
+
+.closeButton {
+  text-align: center;
+  font-weight: 400;
 }
